@@ -13,16 +13,11 @@
 
 package org.quickperf.quarkus.quarkustest.controller;
 
-import io.quarkus.test.junit.QuarkusTest;
 import io.quarkus.test.junit.QuarkusTestExtension;
 import org.hamcrest.CoreMatchers;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.Extension;
 import org.junit.jupiter.api.extension.RegisterExtension;
-import org.quickperf.SystemProperties;
 import org.quickperf.annotation.DisableGlobalAnnotations;
-import org.quickperf.junit5.QuickPerfTest;
-import org.quickperf.junit5.QuickPerfTestExtension;
 import org.quickperf.jvm.allocation.AllocationUnit;
 import org.quickperf.jvm.annotations.HeapSize;
 import org.quickperf.sql.annotation.ExpectSelect;
@@ -31,11 +26,11 @@ import static io.restassured.RestAssured.given;
 
 //@QuickPerfTest
 //@QuarkusTest
-//@HeapSize(value = 50, unit = AllocationUnit.MEGA_BYTE)
+@HeapSize(value = 50, unit = AllocationUnit.MEGA_BYTE)
 public class PlayerControllerTest {
 
     @RegisterExtension
-    QuarkusTestExtension quarkusTestExtension = new QuarkusTestExtension();
+    static QuarkusTestExtension quarkusTestExtension = new QuarkusTestExtension();
 
     /*
     @RegisterExtension
@@ -48,6 +43,8 @@ public class PlayerControllerTest {
         return new Extension() {}; // Extension doing nothing
     }
 
+     */
+    /*
     @RegisterExtension
     QuickPerfTestExtension quickPerfTestExtension = new QuickPerfTestExtension();
     */
