@@ -16,7 +16,8 @@ package org.quickperf.quarkus.quarkustest.controller;
 import io.quarkus.test.junit.QuarkusTestExtension;
 import org.hamcrest.CoreMatchers;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.RegisterExtension;
+import org.junit.jupiter.api.extension.*;
+import org.quickperf.SystemProperties;
 import org.quickperf.annotation.DisableGlobalAnnotations;
 import org.quickperf.jvm.allocation.AllocationUnit;
 import org.quickperf.jvm.annotations.HeapSize;
@@ -29,21 +30,21 @@ import static io.restassured.RestAssured.given;
 @HeapSize(value = 50, unit = AllocationUnit.MEGA_BYTE)
 public class PlayerControllerTest {
 
-    @RegisterExtension
-    static QuarkusTestExtension quarkusTestExtension = new QuarkusTestExtension();
+    //@RegisterExtension
+    //static QuarkusTestExtension quarkusTestExtension = new QuarkusTestExtension();
 
-    /*
-    @RegisterExtension
-    Extension quarkusTestExtension = buildQuarkusExtensionInNewJVM()
 
-    private Extension buildQuarkusExtensionInNewJVM() {
+    @RegisterExtension
+    QuarkusTestExtension quarkusTestExtension = buildQuarkusExtensionInNewJVM();
+
+    private QuarkusTestExtension buildQuarkusExtensionInNewJVM() {
         if(SystemProperties.TEST_CODE_EXECUTING_IN_NEW_JVM.evaluate()) {
             return new QuarkusTestExtension();
         }
-        return new Extension() {}; // Extension doing nothing
+        return new QuarkusTestExtensionDoingNothing(); // Extension doing nothing
     }
 
-     */
+
     /*
     @RegisterExtension
     QuickPerfTestExtension quickPerfTestExtension = new QuickPerfTestExtension();
