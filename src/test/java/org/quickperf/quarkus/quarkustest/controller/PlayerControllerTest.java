@@ -15,40 +15,33 @@ package org.quickperf.quarkus.quarkustest.controller;
 
 import io.quarkus.test.junit.QuarkusTestExtension;
 import org.hamcrest.CoreMatchers;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.*;
 import org.quickperf.SystemProperties;
 import org.quickperf.annotation.DisableGlobalAnnotations;
+import org.quickperf.junit5.QuickPerfTestExtension;
 import org.quickperf.jvm.allocation.AllocationUnit;
 import org.quickperf.jvm.annotations.HeapSize;
 import org.quickperf.sql.annotation.ExpectSelect;
 
 import static io.restassured.RestAssured.given;
 
-//@QuickPerfTest
-//@QuarkusTest
-@HeapSize(value = 50, unit = AllocationUnit.MEGA_BYTE)
+@HeapSize(value = 64, unit = AllocationUnit.MEGA_BYTE) // we need this to force the test to be executed in a new JVM
 public class PlayerControllerTest {
+    @RegisterExtension @Order(1) // quickperf extension needs to be first
+    QuickPerfTestExtension quickPerfTestExtension = new QuickPerfTestExtension();
 
-    //@RegisterExtension
-    //static QuarkusTestExtension quarkusTestExtension = new QuarkusTestExtension();
+    @RegisterExtension @Order(2) // quarkus extension second, and needs to be static as it starts the application on test instance creation
+    static QuarkusTestExtension quarkusTestExtension = buildQuarkusExtensionInNewJVM();
 
-
-    @RegisterExtension
-    QuarkusTestExtension quarkusTestExtension = buildQuarkusExtensionInNewJVM();
-
-    private QuarkusTestExtension buildQuarkusExtensionInNewJVM() {
+    static private QuarkusTestExtension buildQuarkusExtensionInNewJVM() {
         if(SystemProperties.TEST_CODE_EXECUTING_IN_NEW_JVM.evaluate()) {
             return new QuarkusTestExtension();
         }
         return new QuarkusTestExtensionDoingNothing(); // Extension doing nothing
     }
 
-
-    /*
-    @RegisterExtension
-    QuickPerfTestExtension quickPerfTestExtension = new QuickPerfTestExtension();
-    */
 
     @DisableGlobalAnnotations // Global annotations are used in the PlayerServiceTest
                               // They are disabled here to use explicit annotations instead

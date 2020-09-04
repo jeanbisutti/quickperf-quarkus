@@ -25,52 +25,42 @@ class QuarkusTestExtensionDoingNothing extends QuarkusTestExtension {
 
     @Override
     public void interceptBeforeAllMethod(Invocation<Void> invocation, ReflectiveInvocationContext<Method> invocationContext, ExtensionContext extensionContext) throws Throwable {
-        //invocation.proceed();
-        //invocation.skip();
+        invocation.proceed();
     }
 
     @Override
     public <T> T interceptTestClassConstructor(Invocation<T> invocation, ReflectiveInvocationContext<Constructor<T>> invocationContext, ExtensionContext extensionContext) throws Throwable {
-        //invocation.proceed();
-        //invocation.skip();
-        return null;
+        return invocation.proceed();
     }
 
     @Override
     public void interceptBeforeEachMethod(Invocation<Void> invocation, ReflectiveInvocationContext<Method> invocationContext, ExtensionContext extensionContext) throws Throwable {
-        //invocation.proceed();
-        //invocation.skip();
+        invocation.proceed();
     }
 
     @Override
     public void interceptTestMethod(Invocation<Void> invocation, ReflectiveInvocationContext<Method> invocationContext, ExtensionContext extensionContext) throws Throwable {
-        //invocation.proceed();
-        //invocation.skip();
+        invocation.proceed();
     }
 
     @Override
     public void interceptTestTemplateMethod(Invocation<Void> invocation, ReflectiveInvocationContext<Method> invocationContext, ExtensionContext extensionContext) throws Throwable {
-        //invocation.proceed();
-        //invocation.skip();
+        invocation.proceed();
     }
 
     @Override
     public <T> T interceptTestFactoryMethod(Invocation<T> invocation, ReflectiveInvocationContext<Method> invocationContext, ExtensionContext extensionContext) throws Throwable {
-        //invocation.proceed();
-        //invocation.skip();
-        return null;
+        return invocation.proceed();
     }
 
     @Override
     public void interceptAfterEachMethod(Invocation<Void> invocation, ReflectiveInvocationContext<Method> invocationContext, ExtensionContext extensionContext) throws Throwable {
-        //invocation.proceed();
-        //invocation.skip();
+        invocation.proceed();
     }
 
     @Override
     public void interceptAfterAllMethod(Invocation<Void> invocation, ReflectiveInvocationContext<Method> invocationContext, ExtensionContext extensionContext) throws Throwable {
-        //invocation.proceed();
-        //invocation.skip();
+        invocation.proceed();
     }
 
     @Override
